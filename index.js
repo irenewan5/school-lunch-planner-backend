@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 require("dotenv/config");
 
 const plansRouter = require("./routes/plans");
@@ -8,6 +9,8 @@ const kidsRouter = require("./routes/kids");
 const tokenRouter = require("./routes/token");
 
 const app = express();
+
+app.use(cors());
 
 app.use("/plans", plansRouter);
 app.use("/recipes", recipesRouter);
