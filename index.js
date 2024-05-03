@@ -11,6 +11,7 @@ const tokenRouter = require("./routes/token");
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 app.use("/plans", plansRouter);
 app.use("/recipes", recipesRouter);
