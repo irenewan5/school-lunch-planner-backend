@@ -2,8 +2,20 @@ const express = require("express");
 const router = express.Router();
 const knex = require("knex")(require("../knexfile"));
 
-router.get("/", (req, res) => {
-  res.send({});
+router.get("/", async (req, res) => {
+  const { userId } = req.auth;
+  const { startDate, endDate, kidId } = req.query;
+  if ((startDate, endDate, kidId)) {
+    const plans = await knex("plans")
+      .where({
+        kid_id: kidId,
+        user_id: userId,
+      })
+      .whereBetween("date", [startDate, endDate]);
+    res.send(plans);
+  } else {
+    res.send([]);
+  }
 });
 
 router.post("/", async (req, res) => {
