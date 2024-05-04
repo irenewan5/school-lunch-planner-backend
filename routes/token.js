@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
     res.send({ token });
   } else {
-    res.status(404).send({ message: "invalid user" });
+    res.status(401).send({ message: "invalid user" });
   }
 });
 

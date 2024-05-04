@@ -1,9 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const knex = require("knex")(require("../knexfile"));
 
 // List kids
-router.get("/", (req, res) => {
-  res.send({});
+router.get("/", async (req, res) => {
+  const { userId } = req.auth;
+  const kids = await knex("kids").where({ user_id: userId });
+  res.send(kids);
 });
 
 // Add a kid
