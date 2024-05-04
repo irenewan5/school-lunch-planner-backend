@@ -6,11 +6,11 @@ exports.up = function (knex) {
   return knex.schema.createTable("plans", (table) => {
     table.increments("id").primary();
     table.integer("user_id").notNullable();
-    table.string("kid_id").notNullable();
+    table.integer("kid_id").notNullable();
     table.string("date").notNullable();
     table.string("recipe_id").notNullable();
     table.string("recipe_name").notNullable();
-    table.string("recipe_image").notNullable();
+    table.text("recipe_image").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
       .timestamp("updated_at")
