@@ -10,6 +10,7 @@ exports.up = function (knex) {
     table.string("date").notNullable();
     table.string("recipe_id").notNullable();
     table.string("recipe_name").notNullable();
+    table.json("recipe_ingredients").notNullable();
     table.text("recipe_image").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
