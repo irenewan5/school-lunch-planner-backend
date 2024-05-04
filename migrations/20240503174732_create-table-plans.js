@@ -4,11 +4,12 @@
  */
 exports.up = function (knex) {
   return knex.schema.createTable("plans", (table) => {
-    table.date("date").primary();
-    table.string("user_id").notNullable();
+    table.increments("id").primary();
+    table.integer("user_id").notNullable();
     table.string("kid_id").notNullable();
+    table.string("date").notNullable();
     table.string("recipe_id").notNullable();
-    table.string("recipe_label").notNullable();
+    table.string("recipe_name").notNullable();
     table.string("recipe_image").notNullable();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table

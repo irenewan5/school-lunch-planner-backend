@@ -25,7 +25,9 @@ router.get("/", async (req, res) => {
         id,
         image: hit.recipe.image,
         label: hit.recipe.label,
+        ingredientLines: resp.data.recipe.ingredientLines,
         ingredients: hit.recipe.ingredients,
+        yield: resp.data.recipe.yield,
         calories: hit.recipe.calories,
         cuisineType: hit.recipe.cuisineType,
         mealType: hit.recipe.mealType,
@@ -37,8 +39,34 @@ router.get("/", async (req, res) => {
 });
 
 // Get recipe details
-router.get("/:id", (req, res) => {
-  res.send([]);
+router.get("/:id", async (req, res) => {
+  const resp = await axios.get(
+    `${process.env.EDAMAM_BASE_URL}/recipes/v2/${req.params.id}`,
+    {
+      params: {
+        app_id: process.env.EDAMAM_APP_ID,
+        app_key: process.env.EDAMAM_APP_KEY,
+        type: "public",
+      },
+    }
+  );
+  const id = resp.data.recipe.uri.replace(
+    "http://www.edamam.com/ontologies/edamam.owl#recipe_",
+    ""
+  );
+  res.send({
+    id,
+    image: resp.data.recipe.image,
+    label: resp.data.recipe.label,
+    ingredientLines: resp.data.recipe.ingredientLines,
+    ingredients: resp.data.recipe.ingredients,
+    yield: resp.data.recipe.yield,
+    calories: resp.data.recipe.calories,
+    cuisineType: resp.data.recipe.cuisineType,
+    mealType: resp.data.recipe.mealType,
+    dishType: resp.data.recipe.dishType,
+    healthLabels: resp.data.recipe.healthLabels,
+  });
 });
 
 module.exports = router;
