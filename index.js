@@ -14,7 +14,9 @@ const app = express();
 
 app.use(cors());
 app.use((req, res, next) => {
-  if (!(req.path === "/token" && req.method === "POST")) {
+  if (
+    !((req.path === "/token" || req.path === "/users") && req.method === "POST")
+  ) {
     const token = req.headers.token;
     try {
       const result = jwt.verify(token, process.env.JWT_SECRET);

@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
           foodCategory: ingredientsWithSameFoodId[0].food,
           foodId: ingredientsWithSameFoodId[0].foodId,
           image: ingredientsWithSameFoodId[0].image,
-          measures,
+          measures: Object.values(measures),
         };
       }
     );
