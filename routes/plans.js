@@ -5,7 +5,7 @@ const knex = require("knex")(require("../knexfile"));
 router.get("/", async (req, res) => {
   const { userId } = req.auth;
   const { startDate, endDate, kidId } = req.query;
-  if ((startDate, endDate, kidId)) {
+  if (startDate && endDate && kidId) {
     const plans = await knex("plans")
       .where({
         kid_id: kidId,
