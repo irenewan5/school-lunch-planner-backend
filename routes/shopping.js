@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
         });
         return {
           food: ingredientsWithSameFoodId[0].food,
-          foodCategory: ingredientsWithSameFoodId[0].food,
+          foodCategory: ingredientsWithSameFoodId[0].foodCategory,
           foodId: ingredientsWithSameFoodId[0].foodId,
           image: ingredientsWithSameFoodId[0].image,
           measures: Object.values(measures),
